@@ -8,12 +8,21 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="agnoster"
 
 # oh-my-zsh plugins
-plugins=(git docker emacs git-flow golang lein npm python rsync screen sublime
+plugins=(git docker git-flow golang lein npm python rsync screen sublime
     tmux vagrant z)
 
-if [[ "$unamestr" == 'Darwin' ]]; then 
+if [[ "$unamestr" == 'Darwin' ]]; then
     plugins+=(brew brew-cask osx)
 fi
+
+alias emacs="emacs -nw"
+
+# Set up PATH
+if [[ "$unamestr" == 'Darwin' ]]; then
+    export PATH=$PATH:/opt/vertica/bin
+fi
+
+
 
 
 source $ZSH/oh-my-zsh.sh
