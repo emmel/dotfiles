@@ -18,10 +18,25 @@
         dockerfile-mode
         unic0rn-powerline
         flycheck
-        markdown-mode-http))
+        markdown-mode-http
+        yaml-mode
+        Emacs-Groovy-Mode))
+
+;; Turn on ELPA/MELPA (http://stackoverflow.com/questions/23165158)
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
 
 (require 'el-get)
 (add-to-list 'el-get-recipe-path "~/.emacs.d/recipes")
+
+(require 'el-get-elpa)
+;; Build the El-Get copy of the package.el packages if we have not
+;; built it before.  Will have to look into updating later ...
+(unless (file-directory-p el-get-recipe-path-elpa)
+  (el-get-elpa-build-local-recipes))
+
 
 (el-get 'sync my:el-get-packages)
 
@@ -118,3 +133,67 @@
 (autoload 'markdown-mode "markdown-mode"
    "Major mode for editing Markdown files" t)
 
+;; Flyspell
+(defun flyspell-emacs-popup-textual (event poss word)
+  "A textual flyspell popup menu."
+  (require 'popup)
+  (let* ((corrects (if flyspell-sort-corrections
+                       (sort (car (cdr (cdr poss))) 'string<)
+                     (car (cdr (cdr poss)))))
+         (cor-menu (if (consp corrects)
+                       (mapcar (lambda (correct)
+                                 (list correct correct))
+                               corrects)
+                     '()))
+         (affix (car (cdr (cdr (cdr poss)))))
+         show-affix-info
+         (base-menu  (let ((save (if (and (consp affix) show-affix-info)
+                                     (list
+                                      (list (concat "Save affix: " (car affix))
+                                            'save)
+                                      '("Accept (session)" session)
+                                      '("Accept (buffer)" buffer))
+                                   '(("Save word" save)
+                                     ("Accept (session)" session)
+                                     ("Accept (buffer)" buffer)))))
+                       (if (consp cor-menu)
+                           (append cor-menu (cons "" save))
+                         save)))
+         (menu (mapcar
+                (lambda (arg) (if (consp arg) (car arg) arg))
+                base-menu)))
+    (cadr (assoc (popup-menu* menu :scroll-bar t) base-menu))))
+
+(eval-after-load "flyspell"
+  '(progn
+     (fset 'flyspell-emacs-popup 'flyspell-emacs-popup-textual)))
+
+(dolist (hook '(markdown-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+
+(defun flyspell-mode-keys ()
+  "Custom keybindings for flyspell-mode."
+  (define-key flyspell-mode-map (kbd "C-c c") (lambda () (interactive) (flyspell-correct-word))))
+
+(add-hook 'flyspell-mode-hook 'flyspell-mode-keys)
+(put 'downcase-region 'disabled nil)
+
+;; https://gist.github.com/1427240
+(defun add-to-mode (mode &rest files)
+  (dolist (file files)
+    (add-to-list 'auto-mode-alist
+                 (cons file mode))))
+
+;; Gradle-Mode
+(autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
+(add-to-mode 'groovy-mode "\\.groovy$" "\\.gradle$")
+
+
+(put 'upcase-region 'disabled nil)
+
+
+;; Enable copying on Cygwin
+(defun cyg-copy (start end)
+  "Writes a region to Cygwin's clipboard"
+  (interactive "r")
+  (write-region start end "/dev/clipboard"))
