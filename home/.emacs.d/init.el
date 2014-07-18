@@ -13,7 +13,7 @@
      (end-of-buffer)
      (eval-print-last-sexp))))
 
-(setq my:el-get-packages
+(defvar my:el-get-packages
       '(color-theme-solarized
         dockerfile-mode
         unic0rn-powerline
