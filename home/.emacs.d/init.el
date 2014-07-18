@@ -197,3 +197,12 @@
   "Writes a region to Cygwin's clipboard"
   (interactive "r")
   (write-region start end "/dev/clipboard"))
+
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+              (lambda (frame)
+                (with-selected-frame frame
+                  (load-theme 'solarized-dark t)
+		  (setq solarized-broken-srgb 'nil))))
+  progn((load-theme 'solarized-dark t)
+	(setq solarized-broken-srgb 'nil))
