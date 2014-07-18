@@ -20,7 +20,8 @@
         flycheck
         markdown-mode-http
         yaml-mode
-        Emacs-Groovy-Mode))
+        Emacs-Groovy-Mode
+        csv-mode))
 
 ;; Turn on ELPA/MELPA (http://stackoverflow.com/questions/23165158)
 (require 'package)
@@ -198,11 +199,18 @@
   (interactive "r")
   (write-region start end "/dev/clipboard"))
 
+;; Fix themes when using the daemon
 (if (daemonp)
     (add-hook 'after-make-frame-functions
               (lambda (frame)
                 (with-selected-frame frame
                   (load-theme 'solarized-dark t)
-		  (setq solarized-broken-srgb 'nil))))
-  progn((load-theme 'solarized-dark t)
-	(setq solarized-broken-srgb 'nil))
+                  (setq solarized-broken-srgb 'nil))))
+  (progn (load-theme 'solarized-dark t)
+	(setq solarized-broken-srgb 'nil)))
+
+
+;; csv-mode
+(autoload 'csv-mode "csv-mode" "Major mode for editing CSV files." t)
+(add-to-mode 'csv-mode "\\.csv$")
+
