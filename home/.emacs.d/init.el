@@ -1,27 +1,25 @@
-
-
 ;; Turn off menu-bar
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
 ;; Set up el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
 (unless (require 'el-get nil t)
   (url-retrieve
    "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
    (lambda (s)
-     (end-of-buffer)
+     (goto-char (point-max))
      (eval-print-last-sexp))))
 
-(defvar my:el-get-packages
+(setq my:el-get-packages
       '(color-theme-solarized
         dockerfile-mode
         unic0rn-powerline
         flycheck
         markdown-mode-http
         yaml-mode
-        Emacs-Groovy-Mode
-        csv-mode))
+	Emacs-Groovy-Mode
+        csv-mode
+        dockerfile-mode))
 
 ;; Turn on ELPA/MELPA (http://stackoverflow.com/questions/23165158)
 (require 'package)
@@ -33,8 +31,8 @@
 (add-to-list 'el-get-recipe-path "~/.emacs.d/recipes")
 
 (require 'el-get-elpa)
-;; Build the El-Get copy of the package.el packages if we have not
-;; built it before.  Will have to look into updating later ...
+; Build the El-Get copy of the package.el packages if we have not
+; built it before.  Will have to look into updating later ...
 (unless (file-directory-p el-get-recipe-path-elpa)
   (el-get-elpa-build-local-recipes))
 
@@ -43,23 +41,25 @@
 
 ;; Set the theme
 (load-theme 'solarized-dark t)
-(setq solarized-broken-srgb 'nil)
+;(setq solarized-broken-srgb 'nil)
 
 ;; Turn on powerline
+
 (require 'powerline)
 (setq powerline-color1 "#073642")
 (setq powerline-color2 "#002B36")
 (set-face-attribute 'mode-line nil
-                      :foreground "#fdf6e3"
-                      :background "#073642"
-                      :box nil
-                      :inverse-video nil)
+                    :foreground "#fdf6e3"
+                    :background "#073642"
+                    :box nil
+                    :inverse-video nil)
 (set-face-attribute 'mode-line-inactive nil
-                      :foreground "#93a1a1"
-                      :background "#586e75"
-                      :box nil)
+                    :foreground "#93a1a1"
+                    :background "#586e75"
+                    :box nil)
 (powerline-default-theme)
- 
+
+
 ;; no splash screen
 (setq inhibit-splash-screen t)
 
@@ -117,12 +117,7 @@
                  "%b"))))
 
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -132,7 +127,7 @@
 
 ;; Autoload markdown mode
 (autoload 'markdown-mode "markdown-mode"
-   "Major mode for editing Markdown files" t)
+  "Major mode for editing Markdown files" t)
 
 ;; Flyspell
 (defun flyspell-emacs-popup-textual (event poss word)
@@ -199,18 +194,23 @@
   (interactive "r")
   (write-region start end "/dev/clipboard"))
 
-;; Fix themes when using the daemon
-(if (daemonp)
-    (add-hook 'after-make-frame-functions
-              (lambda (frame)
-                (with-selected-frame frame
-                  (load-theme 'solarized-dark t)
-                  (setq solarized-broken-srgb 'nil))))
-  (progn (load-theme 'solarized-dark t)
-	(setq solarized-broken-srgb 'nil)))
-
-
 ;; csv-mode
 (autoload 'csv-mode "csv-mode" "Major mode for editing CSV files." t)
 (add-to-mode 'csv-mode "\\.csv$")
 
+;; ruby-mode
+(add-to-mode 'ruby-mode "Vagrantfile")
+
+;; dockerfile-mode
+(autoload 'dockerfile-mode "dockerfile-mode" "Major mode for editing Dockerfiles." t)
+(add-to-mode 'dockerfile-mode "Dockerfile")
+
+;; Automatically delete trailing whitespace
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(ido-mode 1)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(setq ido-use-filename-at-point 'guess)
+
+(setq vc-handled-backends ())
