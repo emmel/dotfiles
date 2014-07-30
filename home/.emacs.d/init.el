@@ -19,7 +19,8 @@
         yaml-mode
 	Emacs-Groovy-Mode
         csv-mode
-        dockerfile-mode))
+        dockerfile-mode
+        web-beautify))
 
 ;; Turn on ELPA/MELPA (http://stackoverflow.com/questions/23165158)
 (require 'package)
@@ -41,7 +42,7 @@
 
 ;; Set the theme
 (load-theme 'solarized-dark t)
-;(setq solarized-broken-srgb 'nil)
+
 
 ;; Turn on powerline
 
@@ -214,3 +215,5 @@
 (setq ido-use-filename-at-point 'guess)
 
 (setq vc-handled-backends ())
+
+(setq js-indent-level 2)

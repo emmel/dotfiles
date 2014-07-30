@@ -15,7 +15,7 @@ if [[ "$unamestr" == 'Darwin' ]]; then
     plugins+=(brew brew-cask osx)
 fi
 
-alias emacs="emacs -nw"
+alias emacs="TERM=xterm-16color emacs -nw"
 
 # Set up PATH
 if [[ "$unamestr" == 'Darwin' ]]; then
