@@ -15,3 +15,9 @@ source $ZDOTDIR/aliases.zsh
 if [[ -a "$HOME/.cygwin" ]]; then
     source ~/.cygwin
 fi
+
+# Set up completion
+autoload -U compinit
+compinit
+zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
+zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
