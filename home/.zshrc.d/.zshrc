@@ -11,3 +11,7 @@ bindkey "\e[3~" delete-char
 
 source $ZDOTDIR/theme.zsh
 source $ZDOTDIR/aliases.zsh
+
+if [[ -a "$HOME/.cygwin" ]]; then
+    source ~/.cygwin
+fi
