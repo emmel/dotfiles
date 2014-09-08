@@ -4,9 +4,11 @@
     (add-to-list 'auto-mode-alist
                  (cons file mode))))
 
-;; flycheck-mode
-;;(autoload 'flycheck "flycheck-mode" "")
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;; Turn on Flycheck
+(require 'flycheck)
+;; (add-hook 'python-mode-hook 'flycheck-mode)
+(setq-default flycheck-disabled-checkers '(python-flake8))
+
 
 ;; markdown-mode
 (autoload 'markdown-mode "markdown-mode"
@@ -41,5 +43,39 @@
 
 ;; sh-mode
 (add-to-mode 'sh-mode "\\.zsh$")
+
+;; Jedi mode
+(add-hook 'python-mode-hook 'jedi:setup)
+
+;; web-mode
+(defun mde:web-mode-hook ()
+  "Hooks for web-mode."
+  (setq web-mode-enable-auto-pairing t)
+  (custom-set-faces
+   '(web-mode-block-control-face ((t (:inherit web-mode-preprocessor-face))))
+   '(web-mode-block-delimiter-face ((t (:inherit web-mode-block-control-face))))
+   '(web-mode-css-selector-face ((t (:inherit font-lock-function-name-face))))
+   '(web-mode-html-attr-name-face ((t (:inherit font-lock-variable-name-face))))
+   '(web-mode-html-tag-face ((t (:inherit font-lock-function-name-face))))
+   ;; '(web-mode-keyword-face ((t (:inherit web-mode-preprocessor-face))))
+   '(web-mode-preprocessor-face ((t (:inherit web-mode-keyword-face))))
+   ;; '(web-mode-preprocessor-face ((t (:foreground "dodger blue"))))
+   '(web-mode-variable-name-face ((t (:inherit font-lock-reference-face)))))
+  (setq web-mode-ac-sources-alist
+        '(("css" . (ac-source-css-property))
+          ("html" . (ac-source-words-in-buffer ac-source-abbrev)))))
+(add-hook 'web-mode-hook 'mde:web-mode-hook)
+(setq js-indent-level 2)
+
+;; powershell-mode
+(autoload 'powershell-mode "powershell-mode"
+  "Major mode for editing Powershell scripts." t)
+(add-to-mode 'powershell-mode "\\.ps1$")
+(setq powershell-indent 4)
+(setq powershell-continuation-indent 2)
+
+;; (autoload 'sql-indent "sql-indent" "Indentation for SQL Mode." t)
+(eval-after-load "sql"
+  '(load-library "sql-indent"))
 
 (provide 'mde-modes)

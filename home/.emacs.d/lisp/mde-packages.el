@@ -1,15 +1,22 @@
 (setq mde:packages
-      '(color-theme-solarized
-        dockerfile-mode
-        powerline-emmel
-        flycheck
-        markdown-mode-http
-        yaml-mode
-	groovy-mode
+      '(Emacs-Groovy-Mode
+        csharp-mode
         csv-mode
+        direx
         dockerfile-mode
+        emmet-mode
+        evil
+        flycheck
+        jedi
+        markdown-mode-http
+        powerline-emmel
+        powershell-mode
+        solarized
+        sql-indent
         web-beautify
-        evil))
+        web-mode
+        yaml-mode
+        yasnippet))
 
 ;; Set up el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")

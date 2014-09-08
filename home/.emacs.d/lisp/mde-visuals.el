@@ -1,7 +1,24 @@
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(linum ((t (:inherit (shadow default)
+                       :background "black"
+                       :foreground "brightgreen"))))
+ '(font-lock-function-name-face ((((class color)) (:foreground "magenta")))))
+
 ;; Turn off menu-bar
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
-;; Set the theme
+;;; Set the theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/el-get/solarized")
+(autoload 'color-theme-solarized-dark "color-theme-solarized"
+  "color-theme: solarized-dark" t)
+(load-theme 'solarized-dark t)
+(setq solarized-broken-srgb 'nil)
+
+; Set the theme
 (load-theme 'solarized-dark t)
 
 

@@ -1,5 +1,8 @@
 ;;; init.el --- Emacs config entrypoint.
 
+;; Turn off built-in vcs right away
+(setq vc-handled-backends ())
+
 ;; Load other files
 (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/lisp")
@@ -35,7 +38,6 @@
 
 ;; Random settings
 (put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
 
 ;; Automatically delete trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -46,15 +48,5 @@
   (interactive "r")
   (write-region start end "/dev/clipboard"))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(font-lock-function-name-face ((((class color)) (:foreground "magenta")))))
+;; Automatically delete trailing whitespace
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
