@@ -1,0 +1,23 @@
+[user]
+	name = Matt Emmel
+	email = emmel9@gmail.com
+[push]
+	default = matching
+[branch]
+	autosetuprebase = always
+[color]
+	status = auto
+	branch = auto
+[core]
+	autocrlf = input
+	safecrlf = true
+        editor = emacsclient
+	excludesfile = ~/.gitignore
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	type = cat-file -t
+	dump = cat-file -pe
