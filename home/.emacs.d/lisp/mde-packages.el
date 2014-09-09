@@ -16,7 +16,8 @@
         web-beautify
         web-mode
         yaml-mode
-        yasnippet))
+        yasnippet
+        key-chord))
 
 ;; Set up el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")

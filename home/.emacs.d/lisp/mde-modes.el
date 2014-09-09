@@ -1,3 +1,4 @@
+
 ;; https://gist.github.com/1427240
 (defun add-to-mode (mode &rest files)
   (dolist (file files)
@@ -77,5 +78,11 @@
 ;; (autoload 'sql-indent "sql-indent" "Indentation for SQL Mode." t)
 (eval-after-load "sql"
   '(load-library "sql-indent"))
+
+;; Set evil-mode escape sequence to jk
+;; http://stackoverflow.com/questions/10569165/
+(setq key-chord-two-keys-delay 0.2)
+(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+(key-chord-mode 1)
 
 (provide 'mde-modes)
