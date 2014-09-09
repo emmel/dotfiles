@@ -1,5 +1,5 @@
 # Emacs
-alias emacsd="TERM=xterm-16color emacs --daemon"
+alias emacsd="TERM=xterm-16color /usr/local/bin/emacs --daemon"
 alias emacs="TERM=xterm-16color emacsclient -nw"
 
 # ls
