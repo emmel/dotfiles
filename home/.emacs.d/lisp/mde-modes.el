@@ -85,4 +85,9 @@
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 (key-chord-mode 1)
 
+(defun mde/evil-save-hook ()
+  (when (evil-insert-state-p) (evil-normal-state)))
+
+(add-hook 'after-save-hook 'mde/evil-save-hook)
+
 (provide 'mde-modes)
