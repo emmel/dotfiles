@@ -41,6 +41,7 @@
 
 ;; Automatically delete trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+(setq delete-trailing-lines nil)
 
 ;; Enable copying on Cygwin
 (defun cyg-copy (start end)
