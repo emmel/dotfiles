@@ -17,7 +17,16 @@
         web-mode
         yaml-mode
         yasnippet
-        key-chord))
+        key-chord
+        mmm-mako
+        evil-nerd-commenter
+        protobuf-mode
+        cider
+        queue
+        cl-lib
+        linum-relative
+        virtualenvwrapper
+        ein))
 
 ;; Set up el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")

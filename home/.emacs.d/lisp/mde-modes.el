@@ -89,5 +89,27 @@
   (when (evil-insert-state-p) (evil-normal-state)))
 
 (add-hook 'after-save-hook 'mde/evil-save-hook)
+(evilnc-default-hotkeys)
+(eval-after-load "evil"
+  '(progn
+     (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+     (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+     (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)))
+
+;; mmm-mako
+;;(add-to-mode 'python-mode "\\.mako$")
+;;(mmm-add-mode-ext-class 'python-mode "\\.mako'\\" 'mako)
+
+;; Clojure
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(setq nrepl-hide-special-buffers t)
+
+;; Pylint/virtualenv/flycheck
+(autoload 'virtualenvwrapper "virtualenv mode")
+(venv-initialize-interactive-shells)
+(setq venv-location "~/.virtualenvs")
+
+(autoload 'ein "ipython-notebook")
 
 (provide 'mde-modes)
