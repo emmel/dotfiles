@@ -47,6 +47,7 @@
 ;; Line numbers
 (global-linum-mode t)
 (setq linum-format "%d ")
+(require 'linum-relative)
 
 ;; Add closing bracket
 (electric-pair-mode 1)
