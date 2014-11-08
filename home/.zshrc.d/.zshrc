@@ -26,3 +26,10 @@ zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 export WORKON_HOME=~/.virtualenvs
 mkdir -p $WORKON_HOME
 source /usr/local/bin/virtualenvwrapper.sh
+
+# vi bindings
+bindkey -v
+export KEYTIMEOUT=10
+bindkey -M viins 'jk' vi-cmd-mode
+bindkey -M vicmd '/' history-incremental-pattern-search-backward
+bindkey -M viins '^R' history-incremental-pattern-search-backwar

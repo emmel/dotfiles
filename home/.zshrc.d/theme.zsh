@@ -1,9 +1,9 @@
 write_segment(){
     if [ $# -eq 3 ]; then
         if [[ -n $BG ]]; then
-            RPROMPT="%F{$2}%K{$3}$1%F{$BG}%K{$3}%f%k$RPROMPT"
+            NEW_RPROMPT="%F{$2}%K{$3}$1%F{$BG}%K{$3}%f%k$NEW_RPROMPT"
         else
-            RPROMPT="%F{$2}%K{$3}$1%f%k$RPROMPT"
+            NEW_RPROMPT="%F{$2}%K{$3}$1%f%k$NEW_RPROMPT"
         fi
         BG=$3
     fi
@@ -31,15 +31,49 @@ parse_git_status(){
 
 end_rprompt() {
     if [[ -n $BG ]]; then
-       RPROMPT="%F{$BG}%f$RPROMPT"
+       NEW_RPROMPT="%F{$BG}%f$NEW_RPROMPT"
+    fi
+
+    if [[ -n $FIRST_BG ]]; then
+        NEW_RPROMPT="$NEW_RPROMPT%F{8}%K{$FIRST_BG}%f%k"
     fi
 }
 
-build_rprompt() {
+vi_mode_indicator() {
+    case ${KEYMAP} in
+        (vicmd) vi_mode=("'N '" white red) ;;
+        (main|viins) vi_mode=("'I '" white cyan) ;;
+        (*) vi_mode=("'U '" white yellow) ;;
+    esac
+
+    FIRST_BG=$vi_mode[3]
+}
+
+function zle-keymap-select {
+    prep_rprompt
+    vi_mode_indicator
+    write_rprompt
+    zle reset-prompt
+}
+
+function zle-line-init() {
+    zle -K viins
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+prep_rprompt() {
+    NEW_RPROMPT=''
     BG=''
-    vcs_info
-    parse_git_status
+}
+
+write_rprompt() {
+#    vcs_info
+#    parse_git_status
+    eval "write_segment $vi_mode"
     end_rprompt
+    RPROMPT=$NEW_RPROMPT
 }
 
 autoload -Uz vcs_info
@@ -49,8 +83,8 @@ zstyle ':vcs_info:git*' formats "%b"
 #zstyle ':vcs_info:git*' formats '%b'
 #zstyle ':vcs_info:git*' actionformats '%b (%a)'
 precmd() {
-    RPROMPT=''
-    build_rprompt
+    prep_rprompt
+    write_rprompt
 }
 
 autoload -U colors && colors
