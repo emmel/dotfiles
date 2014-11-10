@@ -1,0 +1,6 @@
+(:name powerline
+       :type github
+       :pkgname "emmel/powerline"
+       :depends (cl-lib)
+       :load-path "."
+       :featues powerline)

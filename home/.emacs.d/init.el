@@ -4,7 +4,6 @@
 (setq vc-handled-backends ())
 
 ;; Load other files
-(add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
 (require 'mde-packages)
@@ -15,6 +14,7 @@
 (evil-mode 1)
 
 (require 'mde-visuals)
+
 ;; Place all backup files in one directory.
 (setq backup-directory-alist `((".*" . "~/.emacs.d/backups")))
 (setq auto-save-file-name-transforms `((".*" "~/.saves" t)))
