@@ -17,7 +17,6 @@
         yaml-mode
         yasnippet
 	key-chord
-        mmm-mako
         evil-nerd-commenter
         protobuf-mode
         cider

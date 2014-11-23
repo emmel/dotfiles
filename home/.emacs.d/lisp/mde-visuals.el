@@ -36,7 +36,7 @@
                     :foreground "#93a1a1"
                     :background "#586e75"
                     :box nil)
-( powerline-evil-theme)
+(powerline-evil-theme)
 
 ;; no splash screen
 (setq inhibit-splash-screen t)
