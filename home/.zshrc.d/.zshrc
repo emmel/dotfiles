@@ -32,4 +32,4 @@ bindkey -v
 export KEYTIMEOUT=10
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M vicmd '/' history-incremental-pattern-search-backward
-bindkey -M viins '^R' history-incremental-pattern-search-backwar
+bindkey -M viins '^R' history-incremental-pattern-search-backward
