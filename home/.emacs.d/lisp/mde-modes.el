@@ -112,4 +112,6 @@
 
 (autoload 'ein "ipython-notebook")
 
+(projectile-global-mode)
+
 (provide 'mde-modes)

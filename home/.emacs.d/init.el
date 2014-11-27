@@ -51,3 +51,8 @@
 
 ;; Automatically delete trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+(custom-set-variables
+ )
+(custom-set-faces
+ '(font-lock-function-name-face ((((class color)) (:foreground "magenta"))))
+ '(linum ((t (:inherit (shadow default) :background "black" :foreground "brightgreen")))))

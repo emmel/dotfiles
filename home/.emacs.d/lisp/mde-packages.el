@@ -24,7 +24,9 @@
         cl-lib
         linum-relative
         virtualenvwrapper
-	ein))
+        ein
+        projectile
+        magit))
 
 ;; el-get has issues autoloading powerline
 (add-to-list 'load-path "~/.emacs.d/el-get/powerline")
