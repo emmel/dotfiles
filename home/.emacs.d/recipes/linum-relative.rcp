@@ -1,0 +1,3 @@
+(:name linum-relative
+       :type github
+       :pkgname "coldnew/linum-relative")
