@@ -26,7 +26,8 @@
         virtualenvwrapper
         ein
         projectile
-        magit))
+        magit
+        js2-mode))
 
 ;; el-get has issues autoloading powerline
 (add-to-list 'load-path "~/.emacs.d/el-get/powerline")
