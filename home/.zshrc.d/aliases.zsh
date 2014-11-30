@@ -1,5 +1,6 @@
 # Emacs
-alias emacsd="TERM=xterm-16color /usr/local/bin/emacs --daemon"
+EMACS=`which emacs`
+alias emacsd="TERM=xterm-16color $EMACS --daemon"
 alias emacs="TERM=xterm-16color emacsclient -nw"
 
 # ls
