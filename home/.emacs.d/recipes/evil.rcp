@@ -1,0 +1,3 @@
+(:name evil
+       :type github
+       :pkgname "emacsmirror/evil")
