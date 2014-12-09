@@ -7,11 +7,12 @@
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
 (require 'mde-packages)
-(require 'mde-modes)
-(require 'mde-spelling)
 
 (require 'evil)
 (evil-mode 1)
+
+(require 'mde-modes)
+(require 'mde-spelling)
 
 (require 'mde-visuals)
 
@@ -52,7 +53,23 @@
 ;; Automatically delete trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(font-lock-function-name-face ((((class color)) (:foreground "magenta"))))
- '(linum ((t (:inherit (shadow default) :background "black" :foreground "brightgreen")))))
+ '(linum ((t (:inherit (shadow default) :background "black" :foreground "brightgreen"))))
+ '(web-mode-block-control-face ((t (:inherit web-mode-preprocessor-face))))
+ '(web-mode-block-delimiter-face ((t (:inherit web-mode-block-control-face))))
+ '(web-mode-css-selector-face ((t (:inherit font-lock-function-name-face))))
+ '(web-mode-html-attr-name-face ((t (:foreground "blue"))))
+ '(web-mode-html-tag-bracket-face ((t (:foreground "brightred"))))
+ '(web-mode-html-tag-face ((t (:foreground "brightred"))))
+ '(web-mode-preprocessor-face ((t (:inherit web-mode-keyword-face))))
+ '(web-mode-variable-name-face ((t (:inherit font-lock-reference-face)))))

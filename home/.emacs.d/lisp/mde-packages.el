@@ -27,7 +27,8 @@
         ein
         projectile
         magit
-        js2-mode))
+        js2-mode
+        scss-mode))
 
 ;; el-get has issues autoloading powerline
 (add-to-list 'load-path "~/.emacs.d/el-get/powerline")

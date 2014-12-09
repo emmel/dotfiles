@@ -9,6 +9,13 @@
 (require 'flycheck)
 ;; (add-hook 'python-mode-hook 'flycheck-mode)
 (setq-default flycheck-disabled-checkers '(python-flake8))
+(flycheck-define-checker jsxhint-checker
+  "A JSX syntax and style checker based on JSXHint."
+
+  :command ("jsxhint" (config-file "--config" flycheck-jshintrc) source)
+  :error-patterns
+  ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
+  :modes (web-mode))
 
 
 ;; markdown-mode
@@ -52,21 +59,26 @@
 (defun mde:web-mode-hook ()
   "Hooks for web-mode."
   (setq web-mode-enable-auto-pairing t)
-  (custom-set-faces
-   '(web-mode-block-control-face ((t (:inherit web-mode-preprocessor-face))))
-   '(web-mode-block-delimiter-face ((t (:inherit web-mode-block-control-face))))
-   '(web-mode-css-selector-face ((t (:inherit font-lock-function-name-face))))
-   '(web-mode-html-attr-name-face ((t (:inherit font-lock-variable-name-face))))
-   '(web-mode-html-tag-face ((t (:inherit font-lock-function-name-face))))
-   ;; '(web-mode-keyword-face ((t (:inherit web-mode-preprocessor-face))))
-   '(web-mode-preprocessor-face ((t (:inherit web-mode-keyword-face))))
-   ;; '(web-mode-preprocessor-face ((t (:foreground "dodger blue"))))
-   '(web-mode-variable-name-face ((t (:inherit font-lock-reference-face)))))
+  (when (equal web-mode-content-type "jsx")
+    (flycheck-select-checker 'jsxhint-checker)
+    (flycheck-mode))
   (setq web-mode-ac-sources-alist
         '(("css" . (ac-source-css-property))
           ("html" . (ac-source-words-in-buffer ac-source-abbrev)))))
 (add-hook 'web-mode-hook 'mde:web-mode-hook)
 (setq js-indent-level 2)
+
+(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . web-mode))
+
+(defadvice web-mode-highlight-part (around tweak-jsx activate)
+  (if (equal web-mode-content-type "jsx")
+      (let ((web-mode-enable-part-face nil))
+        ad-do-it)
+    ad-do-it))
+
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-code-indent-offset 2)
 
 ;; powershell-mode
 (autoload 'powershell-mode "powershell-mode"
@@ -113,5 +125,7 @@
 (autoload 'ein "ipython-notebook")
 
 (projectile-global-mode)
+
+
 
 (provide 'mde-modes)
