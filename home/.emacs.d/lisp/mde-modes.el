@@ -69,7 +69,15 @@
 (setq js-indent-level 2)
 
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(js2-basic-offset 2)
+ )
 
 (defadvice web-mode-highlight-part (around tweak-jsx activate)
   (if (equal web-mode-content-type "jsx")
@@ -79,6 +87,7 @@
 
 (setq web-mode-markup-indent-offset 2)
 (setq web-mode-code-indent-offset 2)
+(setq web-mode-comment-style 2)
 
 ;; powershell-mode
 (autoload 'powershell-mode "powershell-mode"
