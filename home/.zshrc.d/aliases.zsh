@@ -9,3 +9,5 @@ alias lsa='ls -alh'
 
 # git
 alias gs='git status'
+alias gl='git log --graph --decorate --date=relative --all --oneline --abbrev-commit'
+
