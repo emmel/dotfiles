@@ -74,4 +74,6 @@
                        :background "black"
                        :foreground "brightgreen")))))
 
+(setq column-number-mode t)
+
 (provide 'mde-visuals)
